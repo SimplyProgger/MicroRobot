@@ -5,6 +5,8 @@
 RF24 radio(9,10);
 int data[2];
 
+#define Joystick A0
+
 void setup() {
   radio.begin();
   radio.setChannel(5);
@@ -14,5 +16,6 @@ void setup() {
   }
 
 void loop() {
-    
+    data[0] = map(AnalogRead(Joystick),0,1023,0,180)
+    radio.write(&data,sizeof(data));
 }
