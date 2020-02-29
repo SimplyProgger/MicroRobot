@@ -24,7 +24,10 @@ void loop() {
     digitalWrite(led,HIGH);
     radio.read(&data,sizeof(data));
     servo.write(data[0]);
-  }else{
-    digitalWrite(led,LOW);
+    if(data[1] == HIGH){
+      digitalWrite(led,HIGH);
+      }else{
+      digitalWrite(led,LOW);  
+        }
   }
 }
