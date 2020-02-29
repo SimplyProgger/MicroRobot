@@ -3,13 +3,21 @@
 #include <RF24.h>
 #include <Servo.h>
 #include <SPI.h>
+#include <LiquidCrystal.h>
+#include <TinyGPS.h>
+#include <SoftwareSerial.h>
 
 Servo servo;
 RF24 radio(9,10);
 int data[2];
 int led;
+SoftwareSerial gpsSerial(3,4);
+TinyGPS gps;
+float lat;
+float lon;
 
 void setup() {
+  gpsSerial.begin(9600);
   Serial.begin(9600);
   pinMode(led,OUTPUT);
   radio.begin();
@@ -30,4 +38,11 @@ void loop() {
       digitalWrite(led,LOW);  
         }
   }
+  while(gpsSerial.available()) {
+    if(gps.encode(gpsSerial.read())) {
+      gps.f_get_position(&lat,&lon);
+      Serial.println(lat);
+      Serial.println(lon);
+      }
+    }
 }
