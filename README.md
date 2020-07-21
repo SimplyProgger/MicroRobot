@@ -1,2 +1,2 @@
 # MicroRobot
-Hello!My name is Yaroslav and i am working on this project!
+The project is intended for Arduino micro robot
